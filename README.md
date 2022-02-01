@@ -1,6 +1,8 @@
-# T-LowFER
+# ChronoKGE
 
-Temporal LowFER (T-LowFER) extends [LowFER](https://github.com/suamin/LowFER) on temporal and event knowledge graphs for link prediction.
+ChronoKGE is a knowledge graph embedding framework to ease time-focused research in representation learning.
+
+![alt text](https://github.com/iodike/ChronoKGE/blob/master/media/chrono-kge.png?raw=true)
 
 <br>
 
