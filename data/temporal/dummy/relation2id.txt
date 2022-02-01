@@ -1,0 +1,3 @@
+knows	0
+visits	1
+likes	2

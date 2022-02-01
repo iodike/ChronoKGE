@@ -1,0 +1,10 @@
+Anna	0
+Ben	1
+Charly	2
+Dan	3
+Emil	4
+Frank	5
+George	6
+Henry	7
+Ian	8
+John	9

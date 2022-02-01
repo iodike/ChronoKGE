@@ -1,0 +1,9 @@
+#
+# Tune
+#
+
+#
+tune:
+  trial: None
+  hours: 24
+  early_stop: False

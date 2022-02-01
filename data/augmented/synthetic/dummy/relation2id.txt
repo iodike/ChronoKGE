@@ -1,0 +1,5 @@
+relation0	0
+relation1	1
+relation2	2
+Relationship	3
+relationship2	4

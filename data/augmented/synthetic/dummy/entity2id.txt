@@ -1,0 +1,4 @@
+Teacher	0
+House	1
+Company	2
+society	3

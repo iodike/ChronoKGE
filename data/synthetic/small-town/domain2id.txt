@@ -1,0 +1,11 @@
+Person	0
+City	1
+Company	2
+Vehicle	3
+Food	4
+Sports	5
+Education	6
+Instrument	7
+Series	8
+Language	9
+Music	10
