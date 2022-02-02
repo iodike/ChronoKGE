@@ -1,54 +1,68 @@
 # Setup
 
 This setup documentation serves as an introduction for extending and
-maintaining the T-LowFER framework.
+maintaining the ChronoKGE framework.
 
 ## Project structure
 
 ### Folder structure
 
-The `t_lowfer` module consists of the following folders:
+The `chrono_kge` module consists of the following folders:
 
-- `experiment`: The experiment classes.
-  - `run`: Experiments with a single run.
-  - `tune`: Experiments with a tuning run.
+- `main`: The main modules.
+  - `handler`: Handler for framework state.
+  - `manager`: Managers for framework execution.
+  - `parser`: Parsers for framework parameter.
+- `experiment`: The experiment modules.
 - `knowledge`: Modules related to data handling and preprocessing.
   - `augmentation`: Augmentation modules.
-  - `kg`: Knowledge graph modules.
-  - `time`: Time processing modules.
-- `model`: The model classes.
-  - `model`: Complete network models.
+  - `chrono`: Time processing modules.
+  - `graph`: Knowledge graph modules.
+- `model`: The model modules.
+  - `kge`: Complete network models.
+    - `deepml`: KGE models using deep learning.
+    - `geometric`: KGE-models using distance scoring.
+    - `semantic`: KGE-models using similarity scoring.
   - `module`: Model modules and extensions.
-- `trainer`: The trainer classes.
-- `tuner`: The tuning classes.
+    - `calculus`: Basic tensor modules.
+    - `embedding`: Embedding modules.
+    - `pooling`: Bilinear pooling modules.
+    - `regularizer`: Regularization modules.
+    - `scoring`: Scoring modules.
+- `statistics`: The statistics modules.
+- `trainer`: The trainer modules.
+- `tuner`: The tuner modules.
 - `utils`: Additional helper functions 
   - `vars`: Constants and enumerations.
   - `web`: Web utilities.
 - `visualization`: Visualization tools.
 
-## Extending T-LowFER
+### KGE Families
+
+- Deep Learning (network): `model.kge.deepml`
+- Geometric (distance): `model.kge.geometric`
+- Semantic matching (similarity): `model.kge.semantic`
+
+## Extending ChronoKGE
 
 ### Adding a new model
 
-1. Add a new model into `model/model` by:
+In the following, we describe how to add a new embedding model.
+
+1. Add a new model into `model/kge/<family>`([Learn more](#kge-families)) by either:
    1. creating a new model which inherits PyTorch's base `nn.Module`
-   2. extending an existing model, e.g., inheriting from `BaseModel`
-2. Add a new run-experiment to `experiment/run` by:
-   1. creating a new experiment
-   2. extending an existing model, e.g., inheriting from `BaseExperiment`
-      1. Note: all abstract/empty functions must be implemented
-3. (**Optional**) Add a new tune-experiment to `experiment/tune`
-4. Register the new model and experiment within the `model/models.py` module
-   1. Add an entry into the `COLLECTIONS` dictionary, where:
-      1. `key`: a unique string identifier used to call the model
-      2. `value`: a tuple containing the class names of 
-         - model
-         - run-experiment
-         - tune-experiment
+   2. extending an existing model, e.g., inheriting from `kge_model.KGE_Model`
+2. Register your model within the `model/__model__.py` module
+   1. Add an entry into the `REGISTER` dictionary, where:
+      1. `key`: a unique string identifier used to call your model
+      2. `value`: the class type of your model
+3. Done!
 
 <br>
 
 ### Adding a new dataset
+
+In the following, we describe how to add a new benchmark dataset.
 
 1. Save the new dataset under one of the following folders:
    1. `static`: Datasets with static facts (s,p,o)
@@ -67,5 +81,6 @@ The `t_lowfer` module consists of the following folders:
       1. `has_timestamps`: KB contains time in form of timestamps
       2. `has_indices`: KB contains entity indices in datasets
       3. `has_labels`: KB contains entity labels in datasets
+3. Done!
 
 <br>

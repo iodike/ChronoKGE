@@ -1,0 +1,25 @@
+#
+# Hyper Parameter
+#
+
+hp:
+  # training
+  entity_dimension: 300
+  learning_rate: 0.01
+  decay_rate: 0.99
+  label_smoothing: 0.01
+  # model
+  time_gran: 1.0
+  factor_rank: 32
+  # dropout
+  input_dropout: 0.2
+  hidden_dropout: [0.5, 0.5, 0.5]
+  # loss
+  margin: 0.1
+  # regularization
+  reg_l1: 0.0
+  reg_l2: 0.0
+  reg_emb: 0.0
+  reg_time: 0.0
+  # normalization
+  alpha: 1e-12

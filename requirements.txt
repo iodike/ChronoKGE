@@ -18,3 +18,4 @@ pyecharts
 seaborn
 sklearn
 tqdm
+yaml

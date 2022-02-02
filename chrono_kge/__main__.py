@@ -9,7 +9,8 @@ from chrono_kge.main.manager.tune_manager import TuneManager
 from chrono_kge.utils.vars.constants import COMMAND
 from chrono_kge.utils.logger import logger
 from chrono_kge.main.manager.config_manager import ConfigManager
-from chrono_kge.main.parser.parser import UIParser
+from chrono_kge.main.parser.parser_cmd import CMD_Parser
+from chrono_kge.main.parser.parser_yaml import YML_Parser
 
 
 '''Disables asynchronous kernel launches / CUDA debugging'''
@@ -20,9 +21,11 @@ from chrono_kge.main.parser.parser import UIParser
 
 if __name__ == '__main__':
 
+    cmd_parser = CMD_Parser()
+    yml_parser = YML_Parser()
+
     '''Parse arguments'''
-    ui_parser = UIParser()
-    args = ui_parser.parser.parse_args()
+    args = cmd_parser.parser.parse_args()
 
     '''Init framework'''
     config = ConfigManager()
@@ -33,14 +36,19 @@ if __name__ == '__main__':
 
     '''Switch command'''
     if args.command == COMMAND.RUN:
-        manager = RunManager(vars(args))
+        if args.main_config != "" and args.run_config != "":
+            main_args = yml_parser.load_args(args.main_config)
+            run_args = yml_parser.load_args(args.run_config)
+            manager = RunManager({**main_args['hp'], **run_args['hp']})
+        else:
+            manager = RunManager(vars(args))
 
     elif args.command == COMMAND.TUNE:
         manager = TuneManager(vars(args))
 
     else:
         logger.warning("Unknown command.")
-        ui_parser.parser.print_help()
+        cmd_parser.parser.print_help()
         exit(1)
 
     '''Start runner'''

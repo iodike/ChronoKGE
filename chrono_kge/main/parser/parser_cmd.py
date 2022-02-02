@@ -1,5 +1,5 @@
 """
-User Input Parser
+CMD Parser
 """
 
 from argparse import ArgumentParser
@@ -8,12 +8,12 @@ from chrono_kge.utils.vars.defaults import Default
 from chrono_kge.knowledge.knowledge_base import KnowledgeBases
 
 
-class UIParser:
+class CMD_Parser:
     """"""
 
     def __init__(self):
         """"""
-        super(UIParser, self).__init__()
+        super().__init__()
 
         self.parser = ArgumentParser()
         self.sub_parser = self.parser.add_subparsers(dest='command')
@@ -30,39 +30,42 @@ class UIParser:
         '''Main arguments'''
 
         self.parser.add_argument('-m', '--model', type=str, default=Default.MODEL,
-                          help='Learning model.')
+                                help='Learning model.')
 
         self.parser.add_argument('-d', '--dataset', type=str, default=Default.KB.name,
-                          help="Which dataset to use: ["
-                          + "|".join(kb.name for kb in KnowledgeBases.ALL_KB)
-                          + "].")
+                                help="Which dataset to use: ["
+                                + "|".join(kb.name for kb in KnowledgeBases.ALL_KB)
+                                + "].")
 
         self.parser.add_argument('-e', '--epochs', type=int, default=Default.MAX_EPOCHS,
-                          help='Number of total epochs.')
+                                help='Number of total epochs.')
 
         self.parser.add_argument('-c', '--cuda', action='store_true',
-                          help="Whether to use cuda (GPU) or not (CPU).")
+                                help="Whether to use cuda (GPU) or not (CPU).")
 
         self.parser.add_argument('-tt', '--train_type', type=str, default='ova',
-                          help="Training type.")
+                                help="Training type.")
 
-        self.parser.add_argument('-tp', '--train_param', type=str, nargs='+', default=[],
-                          help="Training params.")
+        self.parser.add_argument('-tp', '--train_args', type=str, nargs='+', default=[],
+                                help="Training params.")
 
         self.parser.add_argument('-am', '--aug_mode', type=int, default=Default.AUG_MODE,
-                          help='Augmentation mode.')
+                                help='Augmentation mode.')
 
         self.parser.add_argument('-rm', '--reg_mode', type=int, default=Default.REG_MODE,
-                          help='Regularization mode.')
+                                help='Regularization mode.')
 
         self.parser.add_argument('-mm', '--mod_mode', type=int, default=Default.MOD_MODE,
-                          help="Modulation mode.")
+                                help="Modulation mode.")
 
         self.parser.add_argument('-em', '--enc_mode', type=int, default=Default.ENC_MODE,
-                          help="Encoding mode.")
+                                help="Encoding mode.")
 
         self.parser.add_argument('-s', '--save', action="store_true",
-                          help='Whether or not to save results.')
+                                help='Whether or not to save results.')
+
+        self.parser.add_argument('-mc', '--main_config', type=str, default="",
+                                 help="Main config file.")
 
         '''Sub arguments'''
 
@@ -112,6 +115,9 @@ class UIParser:
 
         self.run_parser.add_argument('-rt', '--reg_time', type=float, default=Default.REG_TIME,
                                      help='Time regularization (Lambda).')
+
+        self.run_parser.add_argument('-rc', '--run_config', type=str, default="",
+                                     help="Run config file.")
         return
 
     def add_arguments_tune(self):

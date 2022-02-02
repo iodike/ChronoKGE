@@ -160,7 +160,9 @@ class DIR(object):
 
     NONE: str = ''
 
-    SRC: str = 't_lowfer'
+    SRC: str = 'chrono_kge'
+
+    CONFIG: str = 'config'
 
     DATA: str = 'data'
     AUGMENT: str = 'augmented'
@@ -186,6 +188,7 @@ class PATH(object):
     PROJECT = os.path.join(MAIN)
 
     SRC = os.path.join(PROJECT, DIR.SRC)
+    CONFIG = os.path.join(PROJECT, DIR.CONFIG)
     DATA = os.path.join(PROJECT, DIR.DATA)
     OUTPUT = os.path.join(PROJECT, DIR.OUTPUT)
 

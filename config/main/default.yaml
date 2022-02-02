@@ -1,0 +1,30 @@
+#
+# Run
+#
+
+hp:
+  # model
+  model: "tlowfer"
+  # hardware
+  device: "cpu"
+  cuda: 1
+  # logging
+  eval_step: 10
+  test_step: 100
+  # input/output
+  save: 0
+  path_load: ""
+  path_save: ""
+  # mode
+  aug_mode: 0
+  reg_mode: 0
+  mod_mode: 0
+  enc_mode: 0
+  # exp
+  epochs: 1000
+  batch_size: 512
+  # trainer
+  train_type: "ova"
+  train_args: []
+  # data
+  dataset: "icews14"

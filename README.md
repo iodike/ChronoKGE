@@ -36,56 +36,33 @@ pip3 install -r requirements.txt
 #### Run
 
 > `run` Executes the experiment with the given parameters.
+
+##### Via Command Line:
 ```
-python3 -m t_lowfer [<model-args>] run [<run-args>]
+python3 -m chrono_kge [<model-args>] run [<run-args>]
 ```
 For more details, see [model arguments](#1-model-arguments) and [run arguments](#2-run-arguments).
+
+##### Via YAML Config:
+```
+python3 -m chrono_kge -mc <main_config> run <run_config>
+```
 
 <br>
 
 #### Tune
 
 > `tune` Performs parameter tuning with the provided amount of trials.
+
+##### Via Command Line:
 ```
-python3 -m t_lowfer [<model-args>] tune [<tune-args>]
+python3 -m chrono_kge [<model-args>] tune [<tune-args>]
 ```
 For more details, see [model arguments](#1-model-arguments) and [tune arguments](#3-tune-arguments).
 
-<br>
-
-## Examples
-
-#### 1. `Run` model `v3` on benchmark `icews14` using `GPU`:
+##### Via YAML Config:
 ```
-python3 -m t_lowfer -c -d icews14 -v 3 run
-```
-
-<br>
-
-#### 2. `Run` model `v4` on benchmark `wikidata12k` using `CPU`:
-```
-python3 -m t_lowfer -d wikidata12k -v 4 run
-```
-
-<br>
-
-#### 3. `Tune` model `v3` within `20` trials on benchmark `icews05-15`:
-```
-python3 -m t_lowfer -c -d icews05-15 -v 3 tune -n 20
-```
-
-<br>
-
-#### 4. `Create` `BT-augmented` benchmark `icews14`:
-```
-python3 -m t_lowfer -d icews14 -am 3 run
-```
-
-<br>
-
-#### 5. `Run` model `v3` on `RT+BT` augmented benchmark `icews14`:
-```
-python3 -m t_lowfer -c -d icews14 -v 3 -am 4 run
+python3 -m chrono_kge -mc <main_config> tune <tune_config>
 ```
 
 <br>
@@ -95,7 +72,7 @@ python3 -m t_lowfer -c -d icews14 -v 3 -am 4 run
 ### 1. Model arguments
 
   `-m MODEL, --model MODEL`<br>
-  Which model to use.<br>
+  Learning model.<br>
   Supported models: `lowfer`, `tlowfer`.<br>
   Default `tlowfer`.  
 
@@ -108,97 +85,32 @@ python3 -m t_lowfer -c -d icews14 -v 3 -am 4 run
   Number of total epochs.<br>
   Default `1000`.
 
+  `-am AUGMENT_MODE, --aug_mode AUGMENT_MODE`<br>
+  The mode of augmentation.<br>
+  Supported methods: see [augmentation modes](#augmentation-modes) below.<br>
+  Default `0`.
+
+  `-rm REG_MODE, --reg_mode REG_MODE`<br>
+  The mode of regularization.<br>
+  Supported methods: see [regularization modes](#regularization-modes) below.<br>
+  Default `0`.
+
   `-mm MODULATION_MODE, --mod_mode MODULATION_MODE`<br>
   Modulation mode.<br>
   Supported modulations: see [modulation modes](#modulation-modes) below.<br>
+  Default `0`.
+
+  `-em ENC_MODE, --enc_mode ENC_MODE`<br>
+  Supported methods: see [encoding modes](#encoding-modes) below.<br>
   Default `0`.
 
   `-c, --cuda`<br>
   Whether to use cuda (GPU) or not (CPU).<br>
   Default `CPU`.
 
-  `-am AUGMENT_MODE, --aug_mode AUGMENT_MODE`<br>
-  The mode of augmentation.<br>
-  Supported methods: see [augmentation modes](#augmentation-modes) below.<br>
-  Default `1`.
-
-  `-rm REG_MODE, --reg_mode REG_MODE`<br>
-  The mode of regularization.<br>
-  Supported methods: see [regularization modes](#regularization-modes) below.<br>
-  Default `1`.
-
   `--save`<br>
   Whether or not to save results.<br>
   Default `False`.
-
-<br>
-
-### 2. Run arguments
-
-  `-bs BATCH_SIZE, --batch_size BATCH_SIZE`<br>
-  Batch size.<br>
-  Default `512`.
-  
-  `-lr LEARNING_RATE, --learning_rate LEARNING_RATE`<br>
-  Learning rate.<br>
-  Default `0.01`.
-  
-  `-dr DECAY_RATE, --decay_rate DECAY_RATE`<br>
-  Decay rate.<br>
-  Default `0.99`.
-  
-  `-ed EMBEDDING_DIMENSION, --embedding_dimension EMBEDDING_DIMENSION`<br>
-  Embedding dimensionality.<br>
-  Default `500`.
-
-  `-tg TIME_GRAN, --time_gran TIME_GRAN`<br>
-  Relative time unit for temporal datasets.<br>
-  Base KG granularity at `1.0`.<br>
-  Default `1.0`.
-
-  `-fr FACTOR_RANK, --factor_rank FACTOR_RANK`<br>
-  Factorization rank (latent dimension of MFB).<br>
-  Default `64`.
-
-  `-id INPUT_DROPOUT, --input_dropout INPUT_DROPOUT`<br>
-  Input layer dropout.<br>
-  Default `0.2`.
-
-  `-hd HIDDEN_DROPOUT, --hidden_dropout HIDDEN_DROPOUT`<br>
-  Dropout after the first hidden layer.<br>
-  Default `0.5`.
-
-  `-ls LABEL_SMOOTHING, --label_smoothing LABEL_SMOOTHING`<br>
-  Amount of label smoothing.<br>
-  Default `0.1`.
-
-  `-l1 REG_L1, --reg_l1 REG_L1`<br>
-  L1 regularization (Lasso).<br>
-  Default `1e-12`.
-  
-  `-l2 REG_L2, --reg_l2 REG_L2`<br>
-  L2 regularization (Ridge).<br>
-  Default `1e-12`.
-
-  `-re REG_EMB, --reg_emb REG_EMB`<br>
-  Embedding regularization (Omega).<br>
-  Default `1e-12`.
-  
-  `-rt REG_TIME, --reg_time REG_TIME`<br>
-  Time regularization (Lambda).<br>
-  Default `1e-12`.
-
-<br>
-
-### 3. Tune arguments
-
-  `-n NUM_TRIALS, --num_trials NUM_TRIALS`<br>
-  Number of tuning trials.<br>
-  Default `None (unlimited)`.
-
-  `-t TIMEOUT, --timeout TIMEOUT`<br>
-  Tuner timeout in hrs.<br>
-  Default `24`.
 
 <br>
 

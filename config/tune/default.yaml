@@ -1,0 +1,9 @@
+#
+# Tune
+#
+
+hp:
+  # tuning
+  ntrial: 0
+  hours: 24
+  early_stop: 0

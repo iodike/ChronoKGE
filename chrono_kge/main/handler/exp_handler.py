@@ -29,7 +29,7 @@ class ExperimentHandler:
         self.n_samples = 0
 
         self.train_type = self.args.get('train_type')
-        self.train_args = {str(i): v for i, v in enumerate(self.args.get('train_param', []))}
+        self.train_args = {str(i): v for i, v in enumerate(self.args.get('train_args', []))}
 
         self.trial = None
 
