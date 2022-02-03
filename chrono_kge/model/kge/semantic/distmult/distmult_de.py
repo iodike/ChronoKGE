@@ -1,16 +1,18 @@
 """
-T-LowFER - Time Series Decomposition
+DistMult
 """
 
-from chrono_kge.model.kge.semantic.lowfer.t_lowfer import TLowFER
-from chrono_kge.model.module.embedding.tkge_series import TKGE_Series
+import torch
+
+from chrono_kge.model.kge.tkge_model import TKGE_Model
 from chrono_kge.main.handler.exp_handler import ExperimentHandler
 from chrono_kge.main.handler.model_handler import ModelHandler
 from chrono_kge.main.handler.data_handler import DataHandler
 from chrono_kge.main.handler.env_handler import EnvironmentHandler
+from chrono_kge.model.module.embedding.tkge_diachronic import TKGE_DIACHRONIC
 
 
-class TLowFER_TSD(TLowFER):
+class DistMult_DE(TKGE_Model):
 
     def __init__(self,
                  exp_handler: ExperimentHandler,
@@ -22,21 +24,21 @@ class TLowFER_TSD(TLowFER):
         """"""
         super().__init__(exp_handler, model_handler, data_handler, env_handler, **kwargs)
 
-        # kge
-        self.kge = TKGE_Series(model_handler, data_handler, env_handler)
+        self.kge = TKGE_DIACHRONIC(model_handler, data_handler, env_handler, **kwargs)
 
+        return
+
+    def init(self):
+        """"""
+        super().init()
+        self.kge.init()
         return
 
     def forward(self, x):
         """"""
-
-        '''embeddings'''
         es, er, et, eo = self.kge(x)
 
-        '''pooling'''
-        m = self.mfbp(es, er)
+        m = - torch.sum(es * eo * er, -1)
+        m = torch.sigmoid(m)
 
-        '''scoring'''
-        s = self.scorer.exec(m, self.kge.emb_E.weight)
-
-        return s
+        return m

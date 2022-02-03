@@ -44,7 +44,7 @@ class SyntheticKnowledgeGraph(TemporalKnowledgeGraph):
                  **kwargs
                  ) -> None:
         """"""
-        super().__call__(t_gran)
+        # super().__call__(t_gran)
 
         self.load_dicts()
 

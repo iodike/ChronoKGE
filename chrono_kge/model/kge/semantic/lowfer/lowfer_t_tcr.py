@@ -1,16 +1,16 @@
 """
-T-LowFER - Rotation 2D
+LowFER-T - Time Component Rotation (TCR)
 """
 
 from chrono_kge.model.module.calculus.rotation import Rotation2D
-from chrono_kge.model.kge.semantic.lowfer.t_lowfer import TLowFER
+from chrono_kge.model.kge.semantic.lowfer.lowfer_t import LowFER_T
 from chrono_kge.main.handler.exp_handler import ExperimentHandler
 from chrono_kge.main.handler.model_handler import ModelHandler
 from chrono_kge.main.handler.data_handler import DataHandler
 from chrono_kge.main.handler.env_handler import EnvironmentHandler
 
 
-class TLowFER_R2D(TLowFER):
+class LowFER_T_TCR(LowFER_T):
 
     def __init__(self,
                  exp_handler: ExperimentHandler,
@@ -43,16 +43,3 @@ class TLowFER_R2D(TLowFER):
         s = self.scorer.exec(m, self.kge.emb_E.weight)
 
         return s
-
-    def rotate(self, x, y, t):
-        """"""
-        es_tr = 0
-        er_tr = 0
-
-        '''2D rotation'''
-        for r2d in self.r2ds:
-            s, r = r2d.forward(x, y, t)
-            es_tr = es_tr + s
-            er_tr = er_tr + r
-
-        return es_tr, er_tr

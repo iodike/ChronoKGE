@@ -20,6 +20,7 @@ class ModelHandler:
         self.enc_mode = int(self.args.get('enc_mode', 0))
         self.dropout_input = self.args.get('input_dropout', 0.2)
         self.dropout_hidden = self.args.get('hidden_dropout', [.5, .5, .5])
+        self.de_gamma = self.args.get('de_gamma', 0.5)
 
         return
 

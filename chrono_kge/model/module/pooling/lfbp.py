@@ -4,7 +4,7 @@ Multi-modal factorized bilinear pooling (MFB)
 
 import torch.nn as nn
 
-from chrono_kge.model.module.pooling.mlbp import LowRankBilinearPooling
+from chrono_kge.model.module.pooling.lrbp import LowRankBilinearPooling
 from chrono_kge.utils.vars.defaults import Default
 
 

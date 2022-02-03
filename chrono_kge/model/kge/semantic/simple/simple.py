@@ -5,7 +5,7 @@ SimplE
 import torch
 
 from chrono_kge.model.kge.kge_model import KGE_Model
-from chrono_kge.model.module.embedding.kge_simple import KGE_Simple
+from chrono_kge.model.module.embedding.kge_simple import KGE_SimplE
 from chrono_kge.main.handler.exp_handler import ExperimentHandler
 from chrono_kge.main.handler.model_handler import ModelHandler
 from chrono_kge.main.handler.data_handler import DataHandler
@@ -24,8 +24,14 @@ class SimplE(KGE_Model):
         """"""
         super().__init__(exp_handler, model_handler, data_handler, env_handler, **kwargs)
 
-        self.kge = KGE_Simple(model_handler, data_handler, env_handler, **kwargs)
+        self.kge = KGE_SimplE(model_handler, data_handler, env_handler, **kwargs)
 
+        return
+
+    def init(self):
+        """"""
+        super().init()
+        self.kge.init()
         return
 
     def l2_loss(self):

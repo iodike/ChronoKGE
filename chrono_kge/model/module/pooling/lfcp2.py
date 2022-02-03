@@ -4,11 +4,11 @@ Multi-modal chained factorized bilinear pooling (MFB-C)
 
 import torch.nn as nn
 
-from chrono_kge.model.module.pooling.mfbp import FactorizedBilinearPooling
+from chrono_kge.model.module.pooling.lfbp import FactorizedBilinearPooling
 from chrono_kge.utils.vars.defaults import Default
 
 
-class FactorizedChainedPooling(FactorizedBilinearPooling):
+class FactorizedChainedPooling2(FactorizedBilinearPooling):
 
     def __init__(self,
                  param_dim1,
@@ -32,6 +32,8 @@ class FactorizedChainedPooling(FactorizedBilinearPooling):
                               dtype=Default.DTYPE)
         self.lin4 = nn.Linear(self.out_dim * self.rank, self.rank * self.out_dim, bias=False, device=self.device,
                               dtype=Default.DTYPE)
+        self.lin5 = nn.Linear(self.out_dim, self.rank * self.out_dim, bias=False, device=self.device,
+                              dtype=Default.DTYPE)
 
         self.dh2 = nn.Dropout(self.dh[2])
 
@@ -43,7 +45,9 @@ class FactorizedChainedPooling(FactorizedBilinearPooling):
 
         z = self.fusion2(emb1, emb2, self.lin1, self.lin2)
         z = self.dh0(z)
-        x = self.fusion2(emb3, z, self.lin3, self.lin4)
+        z = self.sum_pool(z)
+        x = self.fusion2(emb3, z, self.lin3, self.lin5)
+        # x = self.fusion2(emb3, z, self.lin3, self.lin4)
         x = self.dh1(x)
         x = self.sum_pool(x)
         x = self.normalize(x)

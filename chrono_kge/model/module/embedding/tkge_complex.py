@@ -4,14 +4,13 @@ TKG Embedding
 import torch
 from torch import nn
 
-from chrono_kge.model.module.embedding.kge import KGE
-from chrono_kge.utils.vars.modes import MOD
+from chrono_kge.model.module.embedding.tkge import TKGE
 from chrono_kge.main.handler.model_handler import ModelHandler
 from chrono_kge.main.handler.data_handler import DataHandler
 from chrono_kge.main.handler.env_handler import EnvironmentHandler
 
 
-class TKGE(KGE):
+class TKGE_ComplEx(TKGE):
 
     def __init__(self,
                  model_handler: ModelHandler,
@@ -29,14 +28,6 @@ class TKGE(KGE):
 
         return
 
-    def init(self) -> None:
-        """Initialise embeddings using normal distribution.
-        """
-        super().init()
-        nn.init.xavier_normal_(self.emb_T.weight.data)
-        nn.init.xavier_normal_(self.emb_R2.weight.data)
-        return
-
     def __call__(self, x):
         """"""
         es = self.emb_E(x[:, 0])
@@ -48,18 +39,15 @@ class TKGE(KGE):
         '''normalization + dropout'''
         es = self.drop_in(self.norm_in(es))
 
+        '''complex'''
+        es_re, es_im = torch.chunk(es, 2, dim=2)
+        er_t_re, er_t_im = torch.chunk(er_t, 2, dim=2)
+        er_nt_re, er_nt_im = torch.chunk(er_nt, 2, dim=2)
+        et_re, et_im = torch.chunk(et, 2, dim=2)
+        eo_re, eo_im = torch.chunk(eo, 2, dim=2)
+
         '''modulate'''
-        er = self.modulate(er_t, er_nt, et)
+        er_re = self.modulate(er_t_re, er_nt_re, et_re)
+        er_im = self.modulate(er_t_im, er_nt_im, et_im)
 
-        return es, er, et, eo
-
-    def modulate(self, x1, x2, y) -> torch.Tensor:
-        """"""
-        if self.MODEL.mod_mode == MOD.TNT:
-            z = x1 * y + x2
-        elif self.MODEL.mod_mode == MOD.T:
-            z = x1 * y
-        else:
-            z = x1
-
-        return z
+        return es_re, es_im, er_re, er_im, et_re, et_im, eo_re, eo_im

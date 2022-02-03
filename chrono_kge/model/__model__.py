@@ -16,12 +16,20 @@ class MODEL(object):
 
     REGISTER = {
         'lowfer': semantic.LowFER,
-        'tlowfer': semantic.TLowFER,
-        'tlowfer-mft': semantic.TLowFER_MFT,
-        'tlowfer-cfb': semantic.TLowFER_CFB,
-        'tlowfer-tsd': semantic.TLowFER_TSD,
-        'tlowfer-r2d': semantic.TLowFER_R2D,
-        'tlowfer-tcr': semantic.TLowFER_TCR
+        'lowfer-t': semantic.LowFER_T,
+        'lowfer-t-lft': semantic.LowFER_T_LFT,
+        'lowfer-t-cfb': semantic.LowFER_T_CFB,
+        'lowfer-t-tsd': semantic.LowFER_T_TSD,
+        'lowfer-t-r2d': semantic.LowFER_T_R2D,
+        'lowfer-t-tcr': semantic.LowFER_T_TCR,
+        'complex': semantic.ComplEx,
+        'complex-t': semantic.ComplEx_T,
+        'distmult': semantic.DistMult,
+        'distmult-de': semantic.DistMult_DE,
+        'simple': semantic.SimplE,
+        'simple-de': semantic.SimplE_DE,
+        'tucker': semantic.TuckER,
+        'tucker-t': semantic.TuckER_T
     }
 
     # check uniqueness of keys

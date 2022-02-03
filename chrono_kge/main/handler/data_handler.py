@@ -44,7 +44,7 @@ class DataHandler:
         self.kb.setup(self.aug_mode)
         return
 
-    def load_kg(self):
+    def load_kg(self) -> None:
         """"""
         if not self.kb:
             self.load_kb()

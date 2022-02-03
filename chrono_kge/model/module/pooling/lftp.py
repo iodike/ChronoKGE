@@ -4,7 +4,7 @@ Multi-modal factorized trilinear pooling (MFT)
 
 import torch.nn as nn
 
-from chrono_kge.model.module.pooling.mfcp import FactorizedChainedPooling
+from chrono_kge.model.module.pooling.lfcp import FactorizedChainedPooling
 
 
 class FactorizedTrilinearPooling(FactorizedChainedPooling):

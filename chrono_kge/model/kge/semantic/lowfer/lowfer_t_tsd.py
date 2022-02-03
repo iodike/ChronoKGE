@@ -1,16 +1,16 @@
 """
-T-LowFER - Time Component Rotation
+LowFER-T - Time Series Decomposition (TSD)
 """
 
-from chrono_kge.model.module.calculus.rotation import Rotation2D
-from chrono_kge.model.kge.semantic.lowfer.t_lowfer import TLowFER
+from chrono_kge.model.kge.semantic.lowfer.lowfer_t import LowFER_T
+from chrono_kge.model.module.embedding.tkge_series import TKGE_Series
 from chrono_kge.main.handler.exp_handler import ExperimentHandler
 from chrono_kge.main.handler.model_handler import ModelHandler
 from chrono_kge.main.handler.data_handler import DataHandler
 from chrono_kge.main.handler.env_handler import EnvironmentHandler
 
 
-class TLowFER_TCR(TLowFER):
+class LowFER_T_TSD(LowFER_T):
 
     def __init__(self,
                  exp_handler: ExperimentHandler,
@@ -22,9 +22,15 @@ class TLowFER_TCR(TLowFER):
         """"""
         super().__init__(exp_handler, model_handler, data_handler, env_handler, **kwargs)
 
-        self.r2ds = [Rotation2D(period=2**i) for i in range(0, 2, 2)]
-        assert len(self.r2ds) > 0
+        # kge
+        self.kge = TKGE_Series(model_handler, data_handler, env_handler)
 
+        return
+
+    def init(self):
+        """"""
+        super().init()
+        self.kge.init()
         return
 
     def forward(self, x):
@@ -33,11 +39,8 @@ class TLowFER_TCR(TLowFER):
         '''embeddings'''
         es, er, et, eo = self.kge(x)
 
-        '''rotation'''
-        es_tr, er_tr = self.rotate(es, er, et)
-
         '''pooling'''
-        m = self.mfbp(es_tr, er_tr)
+        m = self.mfbp(es, er)
 
         '''scoring'''
         s = self.scorer.exec(m, self.kge.emb_E.weight)

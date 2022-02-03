@@ -29,6 +29,10 @@ class TuckER(KGE_Model):
         self.L = nn.Linear(self.MODEL.relation_dim, self.MODEL.entity_dim**2, bias=False, device=self.ENV.device,
                            dtype=Default.DTYPE)
 
+        self.dh1 = nn.Dropout(self.MODEL.dropout_hidden[0])
+        self.dh2 = nn.Dropout(self.MODEL.dropout_hidden[1])
+        self.bn_out = nn.BatchNorm1d(self.MODEL.entity_dim)
+
         self.scorer = CosineSimilarityScorer()
 
         return
@@ -38,18 +42,17 @@ class TuckER(KGE_Model):
 
         # entity
         es, er, eo = self.kge(x)
-        m = self.dropout_input(self.bn_in(es))
-        m = m.view(-1, 1, es.size(1))
+        m = es.view(-1, 1, es.size(1))
 
         # weight relation matrix
         Wr = self.L(er)
         Wr = Wr.view(-1, es.size(1), es.size(1))
-        Wr = self.hidden_dropout1(Wr)
+        Wr = self.dh1(Wr)
 
         # out
         m = torch.bmm(m, Wr)
         m = m.view(-1, es.size(1))
-        m = self.dropout_hidden_1(self.bn_out(m))
+        m = self.dh2(self.bn_out(m))
 
         # score
         s = self.scorer.exec(m, self.kge.emb_E.weight)

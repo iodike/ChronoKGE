@@ -1,18 +1,18 @@
 """
-TComplEx
+SimplE-DE
 """
 
 import torch
 
 from chrono_kge.model.kge.tkge_model import TKGE_Model
+from chrono_kge.model.module.embedding.tkge_simple_de import TKGE_SimplE_DE
 from chrono_kge.main.handler.exp_handler import ExperimentHandler
 from chrono_kge.main.handler.model_handler import ModelHandler
 from chrono_kge.main.handler.data_handler import DataHandler
 from chrono_kge.main.handler.env_handler import EnvironmentHandler
-from chrono_kge.model.module.embedding.tkge_complex import TKGE_ComplEx
 
 
-class ComplEx_T(TKGE_Model):
+class SimplE_DE(TKGE_Model):
 
     def __init__(self,
                  exp_handler: ExperimentHandler,
@@ -24,7 +24,7 @@ class ComplEx_T(TKGE_Model):
         """"""
         super().__init__(exp_handler, model_handler, data_handler, env_handler, **kwargs)
 
-        self.kge = TKGE_ComplEx(model_handler, data_handler, env_handler)
+        self.kge = TKGE_SimplE_DE(model_handler, data_handler, env_handler, **kwargs)
 
         return
 
@@ -34,15 +34,16 @@ class ComplEx_T(TKGE_Model):
         self.kge.init()
         return
 
+    def l2_loss(self):
+        """"""
+        return ((torch.norm(self.ent_h_embs.weight, p=2) ** 2) + (torch.norm(self.ent_t_embs.weight, p=2) ** 2) +
+                (torch.norm(self.rel_embs.weight, p=2) ** 2) + (torch.norm(self.rel_inv_embs.weight, p=2) ** 2)) / 2
+
     def forward(self, x):
         """"""
-        es_re, es_im, er_re, er_im, et_re, et_im, eo_re, eo_im = self.kge(x)
+        e_hh, e_ht, e_th, e_tt, e_r, e_r_inv = self.kge(x)
 
-        m_re = es_re * (er_re * et_re) - es_im * (er_im * et_im)
-        m_im = es_re * (er_im * et_im) + es_im * (er_re * et_re)
+        s1 = torch.sum(e_hh * e_r * e_tt, dim=1)
+        s2 = torch.sum(e_ht * e_r_inv * e_th, dim=1)
 
-        m = m_re * eo_re + m_im * eo_im
-        m = m.sum(dim=2)
-        m = torch.sigmoid(m)
-
-        return m
+        return torch.clamp((s1 + s2) / 2, -20, 20)

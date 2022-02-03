@@ -1,5 +1,5 @@
 """
-KG Embedding
+KGE - SimplE
 """
 
 import math
@@ -12,7 +12,7 @@ from chrono_kge.main.handler.data_handler import DataHandler
 from chrono_kge.main.handler.env_handler import EnvironmentHandler
 
 
-class KGE_Simple(KGE):
+class KGE_SimplE(KGE):
 
     def __init__(self,
                  model_handler: ModelHandler,
