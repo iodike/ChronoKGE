@@ -39,8 +39,19 @@ if __name__ == '__main__':
         if args.main_config != "" and args.run_config != "":
             main_args = yml_parser.load_args(args.main_config)
             run_args = yml_parser.load_args(args.run_config)
-            manager = RunManager({**main_args['hp'], **run_args['hp']})
+            all_args = {**main_args['hp'], **run_args['hp']}
+
+            logger.info("====Parameters====")
+            logger.info(all_args)
+            logger.info("==================")
+
+            manager = RunManager(all_args)
+
         else:
+            logger.info("====Parameters====")
+            logger.info(vars(args))
+            logger.info("==================")
+
             manager = RunManager(vars(args))
 
     elif args.command == COMMAND.TUNE:

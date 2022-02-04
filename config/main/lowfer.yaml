@@ -4,7 +4,7 @@
 
 hp:
   # model
-  model: ""
+  model: "lowfer"
   # hardware
   device: "cuda"
   cuda: 1

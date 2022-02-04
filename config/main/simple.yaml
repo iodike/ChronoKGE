@@ -4,7 +4,7 @@
 
 hp:
   # model
-  model: ""
+  model: "simple-de"
   # hardware
   device: "cuda"
   cuda: 1
@@ -16,7 +16,7 @@ hp:
   path_load: ""
   path_save: ""
   # mode
-  aug_mode: 0
+  aug_mode: 1
   reg_mode: 0
   mod_mode: 0
   enc_mode: 0
