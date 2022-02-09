@@ -5,7 +5,7 @@ SimplE
 import torch
 
 from chrono_kge.model.kge.kge_model import KGE_Model
-from chrono_kge.model.module.embedding.kge_simple import KGE_SimplE
+from chrono_kge.model.module.embedding.kge.kge_simple import KGE_SimplE
 from chrono_kge.main.handler.exp_handler import ExperimentHandler
 from chrono_kge.main.handler.model_handler import ModelHandler
 from chrono_kge.main.handler.data_handler import DataHandler

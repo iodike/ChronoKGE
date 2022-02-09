@@ -9,7 +9,7 @@ from chrono_kge.main.handler.exp_handler import ExperimentHandler
 from chrono_kge.main.handler.model_handler import ModelHandler
 from chrono_kge.main.handler.data_handler import DataHandler
 from chrono_kge.main.handler.env_handler import EnvironmentHandler
-from chrono_kge.model.module.embedding.tkge_diachronic import TKGE_DIACHRONIC
+from chrono_kge.model.module.embedding.tkge.tkge_de import TKGE_DE
 
 
 class DistMult_DE(TKGE_Model):
@@ -24,7 +24,7 @@ class DistMult_DE(TKGE_Model):
         """"""
         super().__init__(exp_handler, model_handler, data_handler, env_handler, **kwargs)
 
-        self.kge = TKGE_DIACHRONIC(model_handler, data_handler, env_handler, **kwargs)
+        self.kge = TKGE_DE(model_handler, data_handler, env_handler, **kwargs)
 
         return
 

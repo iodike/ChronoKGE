@@ -13,7 +13,7 @@ from chrono_kge.utils.vars.defaults import Default
 from chrono_kge.knowledge.graph.temporal_knowledge_graph import TemporalKnowledgeGraph
 
 
-class TCE(nn.Module):
+class MRCA(nn.Module):
 
     def __init__(self,
                  kg: TemporalKnowledgeGraph,

@@ -9,7 +9,7 @@ from chrono_kge.main.handler.exp_handler import ExperimentHandler
 from chrono_kge.main.handler.model_handler import ModelHandler
 from chrono_kge.main.handler.data_handler import DataHandler
 from chrono_kge.main.handler.env_handler import EnvironmentHandler
-from chrono_kge.model.module.embedding.tkge_complex import TKGE_ComplEx
+from chrono_kge.model.module.embedding.tkge.tkge_complex import TKGE_ComplEx
 
 
 class ComplEx_T(TKGE_Model):

@@ -1,5 +1,5 @@
 """
-Cycle-aware embeddings
+Cycle-aware embeddings (CAE)
 """
 
 import numpy as np

@@ -7,7 +7,7 @@ import torch
 
 from torch import nn
 
-from chrono_kge.model.module.embedding.tkge import TKGE
+from chrono_kge.model.module.embedding.tkge.tkge import TKGE
 from chrono_kge.knowledge.chrono.timeseries import TimeSeries
 from chrono_kge.main.handler.model_handler import ModelHandler
 from chrono_kge.main.handler.data_handler import DataHandler

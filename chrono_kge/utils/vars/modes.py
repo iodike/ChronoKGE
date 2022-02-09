@@ -11,6 +11,7 @@ class MOD(object):
     NONE = 0
     T = 1
     TNT = 2
+    DE = 3
 
 
 class ENC(object):

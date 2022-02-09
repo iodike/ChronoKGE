@@ -6,7 +6,7 @@ import math
 
 from torch import nn
 
-from chrono_kge.model.module.embedding.kge import KGE
+from chrono_kge.model.module.embedding.kge.kge import KGE
 from chrono_kge.main.handler.model_handler import ModelHandler
 from chrono_kge.main.handler.data_handler import DataHandler
 from chrono_kge.main.handler.env_handler import EnvironmentHandler

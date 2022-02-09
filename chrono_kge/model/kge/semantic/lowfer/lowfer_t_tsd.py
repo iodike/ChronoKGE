@@ -3,7 +3,7 @@ LowFER-T - Time Series Decomposition (TSD)
 """
 
 from chrono_kge.model.kge.semantic.lowfer.lowfer_t import LowFER_T
-from chrono_kge.model.module.embedding.tkge_series import TKGE_Series
+from chrono_kge.model.module.embedding.tkge.tkge_series import TKGE_Series
 from chrono_kge.main.handler.exp_handler import ExperimentHandler
 from chrono_kge.main.handler.model_handler import ModelHandler
 from chrono_kge.main.handler.data_handler import DataHandler

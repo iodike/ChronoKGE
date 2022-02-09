@@ -6,8 +6,8 @@ import math
 
 from chrono_kge.model.kge.kge_model import KGE_Model
 from chrono_kge.utils.vars.modes import REG, ENC
-from chrono_kge.model.module.embedding.tkge import TKGE
-from chrono_kge.model.module.embedding.tkge_comp import TKGE_Components
+from chrono_kge.model.module.embedding.tkge.tkge import TKGE
+from chrono_kge.model.module.embedding.tkge.cte import CTE
 from chrono_kge.main.handler.exp_handler import ExperimentHandler
 from chrono_kge.main.handler.model_handler import ModelHandler
 from chrono_kge.main.handler.data_handler import DataHandler
@@ -28,7 +28,7 @@ class TKGE_Model(KGE_Model):
 
         # kge
         if self.MODEL.enc_mode == ENC.CYCLE:
-            self.kge = TKGE_Components(self.MODEL, self.DATA, self.ENV)
+            self.kge = CTE(self.MODEL, self.DATA, self.ENV)
         else:
             self.kge = TKGE(self.MODEL, self.DATA, self.ENV)
 

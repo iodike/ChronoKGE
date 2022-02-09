@@ -7,7 +7,7 @@ import torch.nn as nn
 
 from chrono_kge.model.kge.base_kge_model import Base_KGE_Model
 from chrono_kge.utils.vars.modes import REG
-from chrono_kge.model.module.embedding.kge import KGE
+from chrono_kge.model.module.embedding.kge.kge import KGE
 from chrono_kge.model.module.regularizer.omega import Omega
 from chrono_kge.model.module.regularizer.lamda import Lambda
 from chrono_kge.utils.vars.defaults import Default

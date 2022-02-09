@@ -1,5 +1,5 @@
 """
-TKG Embedding - Time Components
+Cyclical Time Embeddings (CTE)
 """
 
 import torch
@@ -8,15 +8,15 @@ import torch.nn.functional as nf
 
 from functools import reduce
 
-from chrono_kge.model.module.embedding.tkge import TKGE
+from chrono_kge.model.module.embedding.tkge.tkge import TKGE
 from chrono_kge.utils.vars.defaults import Default
-from chrono_kge.model.module.embedding.submodule.tce import TCE
+from chrono_kge.model.module.embedding.submodule.mrca import MRCA
 from chrono_kge.main.handler.model_handler import ModelHandler
 from chrono_kge.main.handler.data_handler import DataHandler
 from chrono_kge.main.handler.env_handler import EnvironmentHandler
 
 
-class TKGE_Components(TKGE):
+class CTE(TKGE):
 
     def __init__(self,
                  model_handler: ModelHandler,
@@ -29,7 +29,7 @@ class TKGE_Components(TKGE):
 
         self.c_dim = self.MODEL.time_dim
 
-        self.tce = TCE(self.DATA.kg, self.c_dim, self.ENV.device)
+        self.mrca = MRCA(self.DATA.kg, self.c_dim, self.ENV.device)
 
         self.lin_layers = [nn.Linear(self.c_dim, self.MODEL.time_dim, bias=False, device=self.ENV.device,
                            dtype=Default.DTYPE) for _ in range(len(self.tce.bounds))]
@@ -39,7 +39,7 @@ class TKGE_Components(TKGE):
     def init(self) -> None:
         """"""
         super().init()
-        self.tce.init()
+        self.mrca.init()
         return
 
     def __call__(self, x):
@@ -50,7 +50,7 @@ class TKGE_Components(TKGE):
         eo = self.emb_E(x[:, 3])
 
         '''TCE'''
-        et_cs = self.tce(x[:, 2])
+        et_cs = self.mrca(x[:, 2])
 
         '''projection + aggregation'''
         et = reduce(torch.Tensor.add_, [self.lin_layers[i](et_c) for i, et_c in enumerate(et_cs)],

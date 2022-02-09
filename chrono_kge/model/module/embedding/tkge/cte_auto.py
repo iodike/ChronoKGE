@@ -1,12 +1,12 @@
 """
-TKG Embedding - Time Components
+Cyclical Time Embeddings (CTE) Auto
 """
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as nf
 
-from chrono_kge.model.module.embedding.tkge import TKGE
+from chrono_kge.model.module.embedding.tkge.tkge import TKGE
 from chrono_kge.utils.vars.defaults import Default
 from chrono_kge.model.module.embedding.submodule.cae import CAE
 from chrono_kge.main.handler.model_handler import ModelHandler
