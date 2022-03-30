@@ -1,5 +1,5 @@
 """
-Multi-modal factorized bilinear pooling (MFB)
+Factorized bilinear pooling (FBP)
 """
 
 import torch.nn as nn
@@ -39,7 +39,7 @@ class FactorizedBilinearPooling(LowRankBilinearPooling):
 
     def sum_pool(self, x):
         """Sum Pooling. Unfold and sum.
-        n x (k*o) -> n x k x o -> n x o (d_e)
+        n x (k*o) -> n x o x k -> n x o (d_e)
         """
         x = x.view(-1, self.out_dim, self.rank)
         x = x.sum(-1)

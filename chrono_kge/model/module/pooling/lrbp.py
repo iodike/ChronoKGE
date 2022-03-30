@@ -1,5 +1,5 @@
 """
-Low-rank Bilinear Pooling (MLB)
+Low-rank Bilinear Pooling (LRBP)
 """
 
 import torch

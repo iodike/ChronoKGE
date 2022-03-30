@@ -1,5 +1,5 @@
 """
-Multi-modal chained factorized bilinear pooling (MFB-C)
+Chained factorized bilinear pooling (C-FBP)
 """
 
 import torch.nn as nn

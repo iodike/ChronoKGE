@@ -1,5 +1,5 @@
 """
-Multi-modal chained factorized bilinear pooling (MFB-C)
+Chained factorized bilinear pooling (C-FBP2)
 """
 
 import torch.nn as nn
@@ -30,9 +30,7 @@ class FactorizedChainedPooling2(FactorizedBilinearPooling):
                               dtype=Default.DTYPE)
         self.lin3 = nn.Linear(self.param_dim3, self.rank * self.out_dim, bias=False, device=self.device,
                               dtype=Default.DTYPE)
-        self.lin4 = nn.Linear(self.out_dim * self.rank, self.rank * self.out_dim, bias=False, device=self.device,
-                              dtype=Default.DTYPE)
-        self.lin5 = nn.Linear(self.out_dim, self.rank * self.out_dim, bias=False, device=self.device,
+        self.lin4 = nn.Linear(self.out_dim, self.rank * self.out_dim, bias=False, device=self.device,
                               dtype=Default.DTYPE)
 
         self.dh2 = nn.Dropout(self.dh[2])
@@ -46,8 +44,7 @@ class FactorizedChainedPooling2(FactorizedBilinearPooling):
         z = self.fusion2(emb1, emb2, self.lin1, self.lin2)
         z = self.dh0(z)
         z = self.sum_pool(z)
-        x = self.fusion2(emb3, z, self.lin3, self.lin5)
-        # x = self.fusion2(emb3, z, self.lin3, self.lin4)
+        x = self.fusion2(emb3, z, self.lin3, self.lin4)
         x = self.dh1(x)
         x = self.sum_pool(x)
         x = self.normalize(x)

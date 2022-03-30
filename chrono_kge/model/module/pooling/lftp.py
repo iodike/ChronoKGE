@@ -1,5 +1,5 @@
 """
-Multi-modal factorized trilinear pooling (MFT)
+Factorized trilinear pooling (FTP)
 """
 
 import torch.nn as nn
