@@ -45,7 +45,7 @@ For more details, see [model arguments](#1-model-arguments) and [run arguments](
 
 ##### Via YAML Config:
 ```
-python3 -m chrono_kge -mc <main_config> run <run_config>
+python3 -m chrono_kge -mc <main_config> run -rc <run_config>
 ```
 
 <br>
@@ -62,8 +62,29 @@ For more details, see [model arguments](#1-model-arguments) and [tune arguments]
 
 ##### Via YAML Config:
 ```
-python3 -m chrono_kge -mc <main_config> tune <tune_config>
+python3 -m chrono_kge -mc <main_config> tune -tc <tune_config>
 ```
+
+<br>
+
+## Examples
+
+### Example 1
+
+Run with default parameters `model=lowfer-tnt`, `kg=icews14`, `dim=300`, `lr=0.01` using YAML.
+
+```
+python3 -m chrono_kge -mc "config/main/default.yaml" run -rc "config/run/default.yaml"
+```
+
+### Example 2
+
+Run with default parameters `model=lowfer-tnt`, `kg=icews14`, `dim=300`, `lr=0.01` using CMD.
+
+```
+python3 -m chrono_kge -m "t-lowfer" -d "icews14" -am 1 -mm 1 run -lr 0.01 -ed 300
+```
+
 
 <br>
 
@@ -109,7 +130,7 @@ python3 -m chrono_kge -mc <main_config> tune <tune_config>
   Default `CPU`.
 
   `--save`<br>
-  Whether or not to save results.<br>
+  Whether to save results.<br>
   Default `False`.
 
 <br>

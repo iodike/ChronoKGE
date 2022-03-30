@@ -131,6 +131,10 @@ class CMD_Parser:
 
         self.tune_parser.add_argument('-r', '--reload', action='store_true',
                                       help='Reload previous optimization state (if exists).')
+
+        self.run_parser.add_argument('-tc', '--tune_config', type=str, default="",
+                                     help="Run config file.")
+
         return
 
     def add_arguments_stats(self):
