@@ -218,8 +218,6 @@ Results for semantic matching models on ICEWS14 and ICEWS05-15.
 ### Additional benchmarks
 For an exhaustive summary of related benchmark results, visit [TKGC Benchmark Results](https://docs.google.com/spreadsheets/d/10vBm4ZNhSjXfeUwrzsLfSv2VtY52FvXn/edit?usp=sharing&ouid=113122486539420123457&rtpof=true&sd=true).
 
-<br>
-
 ## Citation
 
 If you find our work useful, please consider citing.
