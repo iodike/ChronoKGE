@@ -175,42 +175,6 @@ Extends LowFER with `dynamic` and `static` relations.<br>
 
 <br>
 
-## Knowledge Graphs
-
-### Static KG
-
-| Dataset | #entities | #relations  | supported |
-| -------- |:--------:|:--------:|:--------:|
-| FB15K     |14,951|1,345| &#10003; |
-| FB15K-237 |14,951|237| &#10003; |
-| WN18      |40,943|18| &#10003; |
-| WN18RR    |40,943|11| &#10003; |
-
-### Temporal KG
-
-| Dataset | #entities | #relations  | #timestamps | startdate  | enddate  | time-granularity  | supported |
-| -------- |:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
-| WIKIDATA12K |12,554|24|1,018|1000-01-01|2018-01-01|yearly| &#10003; |
-| YAGO11K     |10,623|10|-|-453|2844|daily| &#10008; |
-| YAGO15K     |-|-|-|-|-|yearly| &#10008; |
-
-### Event KG
-
-| Dataset | #entities | #relations  | #timestamps | startdate  | enddate  | time-granularity  | supported |
-| -------- |:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
-| ICEWS14   |7,129|230|365|2014-01-01|2014-12-31|daily| &#10003; |
-| ICEWS05-15|10,488|251|4,017|2005-01-01|2015-12-31|daily| &#10003; |
-| ICEWS18   |23,033|256|7,272|2018-1-1|2018-10-31|hourly| &#10003; |
-| GDELT-20 |500|20|366|2015-04-01|2016-03-31|daily| &#10003; |
-
-### Synthetic KG
-
-| Dataset | #entities | #relations  | #timestamps | start-date  | end-date  | time-granularity  | supported |
-| -------- |:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
-| DUMMY   |10|3|30|####-##-01|####-##-30|daily| &#10003; |
-
-<br>
-
 ## Benchmark results
 
 Best overall results are **highlighted**. Best own results are **underlined**.<br>
@@ -285,78 +249,6 @@ Model parameters are reported in [PARAMS.md](PARAMS.md).<br>
 | LowFER-TNT        | 0.484    | 0.608   | 0.710    | 0.563    |
 | LowFER-CTNT       | 0.485    | 0.658   | 0.795    | 0.592    |
 | LowFER-RTNT       | 0.497    | 0.636   | 0.751    | 0.585    |
-
-<br>
-
-### Wikidata12k
-
-| Method            | Hits@1  | Hits@3  | Hits@10  | MRR      |
-| ----------------- |:-------:|:-------:|:--------:|:--------:|
-| TransE            | 0.100   | 0.238   | 0.339    | 0.222   |
-| DistMult          | 0.119   | 0.238   | 0.460    | 0.222   |
-| LowFER            | 0.   | 0.   | 0.    | 0.   |
-||
-| TTransE           | 0.096   | 0.184   | 0.329    | 0.172   |
-| TA-TransE         | 0.329   | -   | `0.807`    | 0.484   |
-| TA-DistMult       | 0.652   | -   | 0.785    | `0.700`   |
-| DE-SimplE         | -   | -   | -    | -   |
-||
-| ATiSE             | 0.175   | 0.318   | 0.481    | 0.280   |
-| TeRo              | 0.198   | 0.329   | 0.507    | 0.299   |
-||
-| RTFE              | `0.366`   | `0.508`   | 0.619    | 0.454   |
-| TIMEPLEX          | 0.227   | -   | 0.532    | 0.333   |
-| TNTComplEx        | -   | -   | -    | -   |
-| TuckerTNT         | -   | -   | -    | -   |
-| TeMP              | -   | -   | -    | -   |
-| CluSTeR           | -   | -   | -    | -   |
-| TeLM              | 0.231   | 0.360   | 0.542    | 0.332    |
-||
-| LowFER-S          | 0.143   | 0.254   | 0.452    | 0.239    |
-||
-| LowFER-T          | 0.245   | 0.351   | 0.491    | 0.324    |
-| LowFER-CT         | 0.229   | 0.341   | 0.484    | 0.311    |
-| LowFER-RT         | 0.246   | 0.346   | 0.481    | 0.323    |
-||
-| LowFER-TNT        | 0.244   | 0.352   | 0.501    | 0.325    |
-| LowFER-CTNT       | 0.230   | 0.342   | 0.483    | 0.312    |
-| LowFER-RTNT       | 0.242   | 0.344   | 0.484    | 0.320    |
-
-<br>
-
-### GDELT-20
-
-| Method            | Hits@1  | Hits@3  | Hits@10  | MRR      |
-| ----------------- |:-------:|:-------:|:-------:|:---------:|
-| TransE            | -   | -   | -    | -   |
-| DistMult          | -   | -   | -    | -   |
-| LowFER            | -   | -   | -    | -   |
-||
-| TTransE           | -   | -   | -    | -   |
-| TA-TransE         | -   | -   | -    | -   |
-| TA-DistMult       | -   | -   | -    | -   |
-| DE-SimplE         | 0.141   | 0.248   | 0.403    | 0.230   |
-||
-| ATiSE             | -   | -   | -    | -   |
-| TeRo              | -   | -   | -    | -   |
-||
-| RTFE              | 0.212   | 0.319   | 0.464    | 0.297   |
-| TIMEPLEX          | -   | -   | -    | -   |
-| TNTComplEx        | -   | -   | -    | -   |
-| TuckerTNT         | `0.283`   | `0.418`   | `0.576`    | `0.381`   |
-| TeMP              | 0.191   | 0.297   | 0.437    | 0.275   |
-| CluSTeR           | 0.116   | -   | 0.319    | 0.183   |
-| TeLM              | -   | -   | -    | -   |
-||
-| LowFER-S          | 0.135   | 0.228   | 0.365    | 0.214    |
-||
-| LowFER-T          | 0.190   | 0.294   | 0.436    | 0.274    |
-| LowFER-CT         | 0.202   | 0.311   | 0.459    | 0.288    |
-| LowFER-RT         | 0.187   | 0.291   | 0.433   | 0.271     |
-||
-| LowFER-TNT        | 0.190   | 0.293   | 0.435    | 0.273    |
-| LowFER-CTNT       | 0.205   | 0.316   | 0.463    | 0.293    |
-| LowFER-RTNT       | 0.183   | 0.286   | 0.428    | 0.266    |
 
 <br>
 
