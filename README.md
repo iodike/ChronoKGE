@@ -177,78 +177,41 @@ Extends LowFER with `dynamic` and `static` relations.<br>
 
 ## Benchmark results
 
-Best overall results are **highlighted**. Best own results are **underlined**.<br>
-Model parameters are reported in [PARAMS.md](PARAMS.md).<br>
+Results for semantic matching models on ICEWS14 and ICEWS05-15.
 
 ### ICEWS14
 
-| Method            | Hits@1  | Hits@3  | Hits@10  | MRR     |
+| Method            | MRR     | H@10    | H@3      | H@1     |
 | ----------------- |:-------:|:-------:|:--------:|:-------:|
-| TransE            | 0.154   | 0.430   | 0.646    | 0.326   |
-| DistMult          | 0.325   | 0.498   | 0.668    | 0.441   |
-| LowFER            | 0.328   | 0.520   | 0.695    | 0.452   |
+| DE-DistMult       | 0.501   | 0.708   | 0.569    | 0.392   |
+| DE-SimplE         | 0.526   | 0.725   | 0.592    | 0.418   |
+| TComplEx          | 0.560   | 0.730   | 0.610    | 0.470   |
+| TNTComplEx        | 0.560   | 0.740   | 0.610    | 0.460   |
+| TuckERT           | 0.594   | 0.731   | 0.640    | 0.518   |
+| TuckERTNT         | 0.604   | 0.753   | 0.655    | 0.521   |
 ||
-| TTransE           | 0.074   | -   | 0.601    | 0.255   |
-| TA-TransE         | 0.095   | -   | 0.625    | 0.275   |
-| TA-DistMult       | 0.366   | -   | 0.686    | 0.477   |
-| DE-SimplE         | 0.418   | 0.592   | 0.725    | 0.526   |
-||
-| ATiSE             | 0.436   | 0.629   | 0.750    | 0.550   |
-| TeRo              | 0.468   | 0.621   | 0.732    | 0.562   |
-||
-| RTFE              | 0.503   | 0.646   | 0.758    | 0.592   |
-| TIMEPLEX          | 0.515   | -   | 0.771    | 0.604   |
-| TNTComplEx        | 0.460   | 0.610   | 0.740    | 0.560   |
-| TuckerTNT         | 0.521   | 0.655   | 0.753    | 0.604   |
-| TeMP              | 0.478   | `0.681`   | `0.828`    | 0.601   |
-| CluSTeR           | 0.338   | -   | 0.712    | 0.460   |
-| TeLM              | `0.545`   | 0.673   | 0.774    | `0.625`   |
-||
-| LowFER-S          | 0.371   | 0.546   | 0.713    | 0.486   |
-||
-| LowFER-T          | 0.507   | 0.628   | 0.721    | 0.582   |
-| LowFER-CT         | 0.518   | 0.647   | 0.743    | 0.597   |
-| LowFER-RT         | 0.512   | 0.645   | 0.745    | 0.594   |
-||
-| LowFER-TNT        | 0.508   | 0.630   | 0.719    | 0.583   |
-| LowFER-CTNT       | 0.525   | 0.652   | 0.740    | 0.602   |
-| LowFER-RTNT       | 0.521   | 0.653   | 0.749    | 0.602   |
+|LowFER-T           | 0.584   | 0.734   | 0.630    | 0.505   |
+|LowFER-TNT         | 0.586   | 0.735   | 0.632    | 0.507   |
+|LowFER-CFB         | 0.623   | 0.757   | 0.671    | 0.549   |
+|LowFER-FTP         | 0.617   | 0.765   | 0.665    | 0.537   |
 
 <br>
 
 ### ICEWS05-15
 
-| Method            | Hits@1  | Hits@3  | Hits@10  | MRR      |
-| ----------------- |:-------:|:-------:|:--------:|:--------:|
-| TransE            | 0.090   | -   | 0.663    | 0.294   |
-| DistMult          | 0.337   | -   | 0.691    | 0.456   |
-| LowFER            | -   | -   | -    | -   |
+| Method            | MRR     | H@10    | H@3      | H@1     |
+| ----------------- |:-------:|:-------:|:--------:|:-------:|
+| DE-DistMult       | 0.484   | 0.718   | 0.546    | 0.366   |
+| DE-SimplE         | 0.513   | 0.748   | 0.578    | 0.392   |
+| TComplEx          | 0.580   | 0.760   | 0.640    | 0.490   |
+| TNTComplEx        | 0.600   | 0.780   | 0.650    | 0.500   |
+| TuckERT           | 0.627   | 0.769   | 0.674    | 0.550   |
+| TuckERTNT         | 0.638   | 0.783   | 0.686    | 0.559   |
 ||
-| TTransE           | 0.084   | -   | 0.616    | 0.271   |
-| TA-TransE         | 0.096   | -   | 0.668    | 0.229   |
-| TA-DistMult       | 0.346   | -   | 0.728    | 0.477   |
-| DE-SimplE         | 0.392   | 0.578   | 0.748    | 0.513   |
-||
-| ATiSE             | 0.378   | 0.606   | 0.794    | 0.519   |
-| TeRo              | 0.469   | 0.668   | 0.795    | 0.586   |
-||
-| RTFE              | 0.553   | 0.706   | 0.811    | 0.645   |
-| TIMEPLEX          | 0.545   | -   | 0.818    | 0.639   |
-| TNTComplEx        | 0.500   | 0.650   | 0.780    | 0.600   |
-| TuckerTNT         | 0.559   | 0.686   | 0.783    | 0.638   |
-| TeMP              | 0.566   | `0.782`   | `0.917`    | `0.691`   |
-| CluSTeR           | 0.349   | -   | 0.630    | 0.446   |
-| TeLM              | `0.590`   | 0.728   | 0.823    | 0.678   |
-||
-| LowFER-S          | 0.376    | 0.551   | 0.716    | 0.492    |
-||
-| LowFER-T          | 0.481    | 0.604   | 0.706    | 0.560    |
-| LowFER-CT         | 0.475    | 0.652   | 0.789    | 0.585    |
-| LowFER-RT         | 0.512    | 0.628   | 0.715    | 0.583    |
-||
-| LowFER-TNT        | 0.484    | 0.608   | 0.710    | 0.563    |
-| LowFER-CTNT       | 0.485    | 0.658   | 0.795    | 0.592    |
-| LowFER-RTNT       | 0.497    | 0.636   | 0.751    | 0.585    |
+|LowFER-T           | 0.559   | 0.714   | 0.605    | 0.476   |
+|LowFER-TNT         | 0.562   | 0.717   | 0.608    | 0.480   |
+|LowFER-CFB         | 0.638   | 0.791   | 0.690    | 0.555   |
+|LowFER-FTP         | 0.625   | 0.792   | 0.681    | 0.534   |
 
 <br>
 
@@ -256,3 +219,22 @@ Model parameters are reported in [PARAMS.md](PARAMS.md).<br>
 For an exhaustive summary of related benchmark results, visit [TKGC Benchmark Results](https://docs.google.com/spreadsheets/d/10vBm4ZNhSjXfeUwrzsLfSv2VtY52FvXn/edit?usp=sharing&ouid=113122486539420123457&rtpof=true&sd=true).
 
 <br>
+
+## Citation
+
+If you find our work useful, please consider citing.
+
+```bibtex
+@inproceedings{dikeoulias-etal-2022-tlowfer,
+    title = "Temporal Knowledge Graph Reasoning with Low-rank and Model-agnostic Representations",
+    author = "Dikeoulias, Ioannis and
+    Amin, Saadullah and 
+    Neumann, Günter",
+    booktitle = "Proceedings of the 7th Workshop on Representation Learning for NLP",
+    month = may,
+    year = "2022",
+    address = "Online",
+    publisher = "Association for Computational Linguistics"
+}
+}
+```
