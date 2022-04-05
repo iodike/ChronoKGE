@@ -234,5 +234,4 @@ If you find our work useful, please consider citing.
     address = "Online",
     publisher = "Association for Computational Linguistics"
 }
-}
 ```
