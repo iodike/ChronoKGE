@@ -223,15 +223,18 @@ For an exhaustive summary of related benchmark results, visit [TKGC Benchmark Re
 If you find our work useful, please consider citing.
 
 ```bibtex
-@inproceedings{dikeoulias-etal-2022-tlowfer,
+@inproceedings{dikeoulias-etal-2022-temporal,
     title = "Temporal Knowledge Graph Reasoning with Low-rank and Model-agnostic Representations",
-    author = "Dikeoulias, Ioannis and
-    Amin, Saadullah and 
-    Neumann, Günter",
+    author = {Dikeoulias, Ioannis  and
+      Amin, Saadullah  and
+      Neumann, G{\"u}nter},
     booktitle = "Proceedings of the 7th Workshop on Representation Learning for NLP",
     month = may,
     year = "2022",
-    address = "Online",
-    publisher = "Association for Computational Linguistics"
+    address = "Dublin, Ireland",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2022.repl4nlp-1.12",
+    doi = "10.18653/v1/2022.repl4nlp-1.12",
+    pages = "111--120",
 }
 ```
